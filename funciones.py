@@ -10,7 +10,11 @@ f. Mostrar todos los números
 ⇒ Realiza cada una de las opciones con funciones.
 ⇒ Utiliza la función siguiente para generar números aleatorios (entre 0 y 1000).
 """
-"""
+from random import randint
+
+lista=[]
+for i in range(100):
+    lista.append(randint(0, 1000))
 def ConocerMayor(lista):
     mayor=lista[0]
     for i in lista:
@@ -18,7 +22,7 @@ def ConocerMayor(lista):
             mayor = i
     return mayor
 def ConocerMenor(lista):
-    menor=[100]
+    menor=lista[99]
     for i in lista:
         if i<menor:
             menor=i
@@ -29,18 +33,56 @@ def Suma(lista):
         if i>0:
             suma+=i                       
     return suma
-"""
-"""
+def Promedio(lista):
+    return (Suma(lista)/(len(lista)))
+def sustituirNumero(lista,numero_sustituto):
+    for i in lista:
+        if numero_sustituto==i:
+            i=numero_sustituto
+    return lista
+fin="no"
+while fin=="no":
+    opcion=str(input("Escoge una opcion:"))
+    if opcion== 'a':
+            print(f"Este es el numero mayor de la lista:{ConocerMayor(lista)}")
+    elif opcion=="b":
+        print(f"Este es el numero menor de la lista:{ConocerMenor(lista)}")
+    elif opcion=="c":
+        print(f"Este es la suma de la lista:{Suma(lista)}")
+    elif opcion=="d":
+        print(f"Este es el promedio de la lista:{Promedio(lista)}")
+    elif opcion=="e":
+        numero_sustituto=int(input("Dime"))
+        print(sustituirNumero(lista, numero_sustituto))
+    elif opcion=="f":
+        print(lista)
+    else:
+        fin="si"
 
 """
-
+"""
 """
 2.Realiza un programa que lea 10 números, los imprima separados por coma y a
 continuación los desplace una posición (y los muestre por pantalla desplazados), de
 tal forma que el último pase a la primera posición, el primero a la segunda, el
 segundo a la tercera, y así sucesivamente
 """
+lista=[1,2,3,4,5,6,7,8,9,10]
 
+def desplazarPosicion(lista):
+    posicionA=lista[0]
+    posicionN=0
+    
+    lista[0]=lista[(len(lista))-1]
+   
+    for i in range(1,len(lista)):
+        posicionN=lista[i]
+        lista[i]=posicionA
+        posicionA=posicionN
+    return lista
+
+print(lista)
+print(desplazarPosicion(lista))
     
 
 
@@ -54,7 +96,7 @@ Introduce el año de a fecha: 2009
 La fecha en formato largo es 15 de Marzo de 2009
 Debe validar los datos y ejecutarse hasta que se introduzca un día negativo.
 """
-"""
+
 def es_bisiesto(year):
     return (year%4==0 and (year%100!=0 or year%400==0))
 
@@ -89,13 +131,13 @@ while dia >= 0:
     dia     = int(input("Introduzca un día: "))
     mes     = int(input("Introduzca un mes válido: "))
     anyo    = int(input("Introduzca un mes válido: "))
-"""
+
 """
 4.Crea un programa que lea por teclado números de forma sucesiva y los guarde en
 una lista; el proceso de lectura y guardado finalizará cuando metamos un número
 negativo. En ese momento se mostrará el elemento mayor y los números pares.
 """
-"""
+
 fin="no"
 lista=[]
 while fin!="si":
@@ -123,7 +165,7 @@ def numero_Pares(lista):
     return par
 print(f"Los numeros pares son los siguente:{numero_Pares(lista)}")
 print(f"El numero mayor es :{Obtener_elemento_mayor(lista)}")
-"""
+
 
          
         
@@ -132,7 +174,7 @@ print(f"El numero mayor es :{Obtener_elemento_mayor(lista)}")
 contenido sea igual a la original pero invertida. Así, dada la lista [‘Di’, ‘buen’, ‘día’, ‘a’,
 ‘papa’], deberá devolver [‘papa’, ‘a’, ‘día’, ‘buen’, ‘Di’].
 """
-"""
+
 #Superimportante para futuro
 lista=["Di","buen", "dia", "a" , "papa", "y" ,"a","mama"]
 def Reverse(lista):
@@ -142,14 +184,14 @@ def Reverse(lista):
     return invertida
         
 print(Reverse(lista))
-"""
+
 
 
 """
 6. Diseña una función llamada estaOrdenada que reciba una lista de elementos y
 devuelva True si está ordenada o False en caso contrario.
 """
-"""
+
 #Superimportante para futuro
 lista=[1,2,3,4]
 ordenada=True
@@ -160,7 +202,7 @@ def esta_Ordenada(lista):
 
     return ordenada
 print(f"La {lista} esta ordenda:{ordenada}")
-"""
+
 
 
 """
@@ -169,7 +211,7 @@ encajan o no. Las fichas son recibidas en dos cadenas de texto con el siguiente
 formato
 [3,4] [2,5]
 """
-"""
+
 MINIMO=0
 MAXIMO=6
 def es_valida(ficha):
@@ -184,7 +226,7 @@ if (es_valida(ficha_1) and es_valida(ficha_2)) and ficha_1[1]==ficha_2[1] or  fi
     print("Encajan")
 else:
     print("No encajan")
-"""
+
 
 
 
@@ -197,7 +239,7 @@ b. el sumatorio
 c. el promedio de los valores.
 d. una lista con el factorial de cada uno de esos números.
 """
-"""
+
 fin="no"
 lista=[]
 while fin!="si":
@@ -205,16 +247,20 @@ while fin!="si":
     lista.append(numero)
     if numero<0:
         fin="si"
-def Primos(lista):
-    primo=[]
-    for i in lista:         #acabar
-        if i>2:
-            for i in range(2,i):
-                if i%i!=0:
-                    primo.append(i)
-                       
-    return primo  
-print(Primos(lista))       
+def EsPrimo(numero):
+    esprimo=True
+    if numero>2:
+        for i in range(2,numero):
+            if numero%i==0:
+                esprimo=False
+    return esprimo
+def NumerosPrimos(lista):
+    primos=[]
+    for i in lista:
+        if i>=2:
+            if EsPrimo(i)==True:
+                primos.append(i)
+    return primos      
 def Sumatorio(lista):
     suma=0
     for i in lista:
@@ -223,23 +269,37 @@ def Sumatorio(lista):
     return suma
 def Promedio_Valores(lista):
 
+
     suma=0
     for i in lista:
         if i>0:
             suma+=i
             promedio=suma/((len(lista)-1))
     return promedio
+def factorial(numero):
+    factorial = 1 
+    for i in range(1,numero+1):
+        factorial *= i
+    return factorial
+def Factoriales(lista):
+    factoriales=[]
+    for i in lista:
+        if i>0:
+            factoriales.append(factorial(i))
+    return factoriales
 
+
+print(f"Los numero primos son:{NumerosPrimos(lista)}")
 print(f"El sumatorio es:{Sumatorio(lista)}")
 print(f"El promedio es:{Promedio_Valores(lista)} ")
-"""
+print(f"Los factoriales de cada numero son:{Factoriales(lista)}")
 
 """
 9. Desarrolla un programa que a partir de una lista de números y un entero k, realice la
 llamada a tres funciones: a) para devolver una lista de números con los menores de
 k, b) otra con los mayores y c) otra con aquellos que son múltiplos de k.
 """
-"""
+
 numero=90
 
 lista=[23,9,808,686,84,27,80,60,500,540]
@@ -266,7 +326,7 @@ def ObtenerMultiplo(lista):
 print(f"{ObtenerMenor(lista)} Estos son los numeros Menores")
 print(f"{ObtenerMayor(lista)} Estos son los numeros Mayores")
 print(f"{ObtenerMultiplo(lista)} Estos son los numeros Multiplos")
-"""
+
 
 """
 10. Diseña una función conversor que convierta un número de binario a decimal o de
@@ -279,7 +339,7 @@ puesto que los valores en binario son 0 y 1.
 11. Escribe una función intersect que reciba dos listas y devuelva otra lista con los
 elementos que son comunes a ambas, sin repetir ninguno.
 """
-"""
+
 lista1=[1,7,287,37,9,372,950,27]
 lista2=[4,9,950,8673,2,78,27,287]
 
@@ -291,23 +351,28 @@ def intersect(lista1,lista2):
                 comunes.append(i)
     return comunes
 print(intersect(lista1, lista2))
-"""
+
 
 """
 12. Escribe una función unionListas que reciba dos listas y devuelva los elementos que
 pertenecen a una, o bien, a la otra, pero sin repetir ninguno (unión de conjuntos).
 """
-"""
-lista1=[1,7,287,37,9,372,950,27]
-lista2=[4,9,950,8673,2,78,27,287]
+
+lista1=[1,2,3,"a","l"]
+lista2=[4,6,7,3,2,9,0,"a","h"]
 def unionLista(lista1,lista2):
+    
+    union=[]
     for i in lista1:
-        for y in lista2:                       #acaba
-          if i!=y:
-            lista2.append(i)
-    return lista2
-print(unionLista(lista1, lista2))
-"""
+        if i not in lista2:
+            union.append(i)
+           
+        for y in lista2:
+            if y not in lista1:
+                union.append(y)
+    return union
+print(unionLista(lista1,lista2))
+
 
                 
 
@@ -315,18 +380,18 @@ print(unionLista(lista1, lista2))
 13. Escribe una función que, dada una lista de nombres y una letra, devuelva una lista
 con todos los nombres que empiezan por dicha letra. Debe validar los datos.
 """
-"""
+
 letra=str(input("Dime una letra"))    
 lista=["Abel","Monica","Francisco","Adelina","Almudena","Jose"]
 
-def unionLista(lista):                            
+def Listas(lista):                            
     union=[]
     for i in lista:
         if i[0]==letra:
             union.append(i)
     return union
-print(unionLista(lista))
-"""
+print(Listas(lista))
+
 
     
     
